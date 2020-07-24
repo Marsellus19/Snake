@@ -7,9 +7,40 @@
 //
 
 #include <iostream>
+#include <ncurses.h>
+#include <list>
+#include <string>
+#include "snake.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    while(game.play){
+        game.refreshwin();
+        
+        game.getInput();
+        
+        if(game.pause) menu.show();
+        
+        snake.update();
+        
+        if(snake.isDead()){
+            menu.show();
+            snake.newSnake();
+        }
+        
+        if(fruit.isEaten()){
+            fruit.update();
+            snake.grow();
+        }
+        
+        snake.show();
+        
+        fruit.show();
+        
+        snake.showScore();
+    }
+    
+    endwin();
+    
     return 0;
 }
