@@ -4,6 +4,21 @@
 //  Created by Marcel on 05/05/2020.
 //  Copyright © 2020 Marcel. All rights reserved.
 
+void defColors(){
+    use_default_colors();
+    start_color();
+    
+#define YELLOW 1
+#define CYAN 2
+#define RED 3
+#define BLUE 4
+    
+    init_pair(1, COLOR_YELLOW, -1);
+    init_pair(2, COLOR_CYAN, -1);
+    init_pair(3, COLOR_RED, -1);
+    init_pair(4, COLOR_BLUE, -1);
+}
+
 class Game {
     
     const static int height = 50, width = 100;
@@ -171,19 +186,22 @@ public:
 
 class Menu{
     
-    const static int numberOfMenuItems = 3;
-    std::string itemName[numberOfMenuItems] = {"New Game", "Load Game", "Exit"};
-    
     WINDOW *menu_win;
-    bool *playGame;
-    bool *pauseGame;
     
 public:
     
-    Menu(bool *playGame, bool *pauseGame);
-    ~Menu(){}
+    bool *playGame;
+    bool *pauseGame;
     
-    void show(){
+    int numberOfMenuItems;
+    std::string *itemName;
+    std::string menuMessage;
+    
+    //Menu(bool *playGame, bool *pauseGame);
+    //~Menu(){}
+    
+    
+     void show(){
         bool menuActiv = true;
         int menuItem = 0;
         menu_win = newwin(20, 80, 5, 10);
@@ -201,12 +219,12 @@ public:
             else if(input == KEY_DOWN) menuItem++;
             else if(input == 10) menuActiv = false; //Enter key
             
-            if(menuActiv == false && menuItem == 2) *playGame = false;
+            if(menuActiv == false && menuItem == numberOfMenuItems - 1) *playGame = false; //last menu otem defaults to exit the menu
             
             if(menuItem == -1) menuItem = numberOfMenuItems - 1;
             else if(menuItem == numberOfMenuItems) menuItem = 0;
             
-            printInTheMiddle(menu_win, 5, "Welcome to the game of snake!");
+            printInTheMiddle(menu_win, 5, menuMessage);
             
             for(int i=0; i<numberOfMenuItems; i++){
                 if(menuItem != i)printInTheMiddle(menu_win, 10 + i, itemName[i]);
@@ -226,22 +244,27 @@ public:
         mvwprintw(local_win, height, (40-((int)stringLength/2)), "%s", text.c_str());
     }
     
-}menu(&game.play, &game.pause);
+     
+};//menu(&game.play, &game.pause);
 
-void defColors(){
-    use_default_colors();
-    start_color();
+class MainMenu: public Menu{
+    public:
     
-#define YELLOW 1
-#define CYAN 2
-#define RED 3
-#define BLUE 4
+    MainMenu(bool *playGame, bool *pauseGame){
+        numberOfMenuItems = 3;
+        itemName = new std::string[numberOfMenuItems];
+        itemName[0] = "New Game";
+        itemName[1] = "Load Game";
+        itemName[2] = "Exit Game";
+        menuMessage = "Welcome to the game of snake!";
+        
+        this-> playGame = playGame;
+        this-> pauseGame = pauseGame;
+        
+        defColors();
+    }
     
-    init_pair(1, COLOR_YELLOW, -1);
-    init_pair(2, COLOR_CYAN, -1);
-    init_pair(3, COLOR_RED, -1);
-    init_pair(4, COLOR_BLUE, -1);
-}
+}main_menu(&game.play, &game.pause);
 
 Game::Game(){
     system("printf '\e[8;50;100t'"); //resize the window to 100x50
@@ -257,10 +280,10 @@ Game::Game(){
     pause = true;
 }
 
-
+/*
 Menu::Menu(bool *playGame, bool *pauseGame){
     defColors();
     this-> playGame = playGame;
     this-> pauseGame = pauseGame;
 }
-
+*/

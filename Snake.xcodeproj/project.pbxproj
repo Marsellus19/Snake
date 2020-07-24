@@ -28,6 +28,7 @@
 		1F3B641924604616007EFBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FDB735524618F1D001FD332 /* libncurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libncurses.tbd; path = usr/lib/libncurses.tbd; sourceTree = SDKROOT; };
 		1FDB735724618F54001FD332 /* snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = snake.h; sourceTree = "<group>"; };
+		1FE2EAC124CB29FC00D8527B /* menus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menus.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 			children = (
 				1F3B641924604616007EFBF5 /* main.cpp */,
 				1FDB735724618F54001FD332 /* snake.h */,
+				1FE2EAC124CB29FC00D8527B /* menus.h */,
 			);
 			path = Snake;
 			sourceTree = "<group>";

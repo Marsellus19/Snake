@@ -19,12 +19,12 @@ int main(int argc, const char * argv[]) {
         
         game.getInput();
         
-        if(game.pause) menu.show();
+        if(game.pause) main_menu.show();
         
         snake.update();
         
         if(snake.isDead()){
-            menu.show();
+            main_menu.show();
             snake.newSnake();
         }
         
