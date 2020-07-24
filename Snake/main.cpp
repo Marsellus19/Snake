@@ -11,6 +11,7 @@
 #include <list>
 #include <string>
 #include "snake.h"
+#include "menus.h"
 
 int main(int argc, const char * argv[]) {
     
