@@ -10,19 +10,19 @@
 #include <ncurses.h>
 #include <list>
 #include <string>
-#include "snake.h"
+#include "game.h"
 #include "menus.h"
+#include "snake.h"
+#include "fruit.h"
 
 int main(int argc, const char * argv[]) {
     
     while(game.play){
         game.refreshwin();
         
-        game.getInput();
+        snake.update(game.getInput());
         
         if(game.pause) main_menu.show();
-        
-        snake.update();
         
         if(snake.isDead()){
             main_menu.show();

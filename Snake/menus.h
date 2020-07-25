@@ -85,10 +85,10 @@ public:
     
 }main_menu(&game.play, &game.pause);
 
-class PauseMenu: public Menu{
+class DifficultyMenu: public Menu{
 public:
     
-    PauseMenu(bool *playGame, bool *pauseGame, int *fps){
+    DifficultyMenu(bool *playGame, bool *pauseGame){
         numberOfMenuItems = 3;
         menuMessage = "Choose difficulty";
         itemName = new std::string[numberOfMenuItems];
@@ -102,5 +102,5 @@ public:
         defColors();
     }
     
-}pause_menu(&game.play, &game.pause, &game.fps);
+}difficulty_menu(&game.play, &game.pause);
 

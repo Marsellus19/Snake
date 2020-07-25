@@ -30,6 +30,8 @@
 		1FDB735724618F54001FD332 /* snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = snake.h; sourceTree = "<group>"; };
 		1FE2EAC124CB29FC00D8527B /* menus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menus.h; sourceTree = "<group>"; };
 		1FE2EAC224CB2D0B00D8527B /* to_do */ = {isa = PBXFileReference; lastKnownFileType = text; path = to_do; sourceTree = "<group>"; };
+		1FE2EAC324CC652200D8527B /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
+		1FE2EAC424CC68F500D8527B /* fruit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fruit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				1F3B641924604616007EFBF5 /* main.cpp */,
-				1FDB735724618F54001FD332 /* snake.h */,
+				1FE2EAC324CC652200D8527B /* game.h */,
 				1FE2EAC124CB29FC00D8527B /* menus.h */,
+				1FDB735724618F54001FD332 /* snake.h */,
+				1FE2EAC424CC68F500D8527B /* fruit.h */,
 				1FE2EAC224CB2D0B00D8527B /* to_do */,
 			);
 			path = Snake;
@@ -106,7 +110,7 @@
 		1F3B640E24604616007EFBF5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = Marcel;
 				TargetAttributes = {
 					1F3B641524604616007EFBF5 = {
@@ -256,6 +260,7 @@
 		1F3B641E24604616007EFBF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -264,6 +269,7 @@
 		1F3B641F24604616007EFBF5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
