@@ -1,4 +1,3 @@
-//
 //  fruit.h
 //  Snake
 //
@@ -7,21 +6,23 @@
 //
 
 class Fruit{
-public:
-    int *snake_head_y, *snake_head_x;
+    
     int fruit_x, fruit_y;
+    
+public:
     WINDOW *local_win;
     
-    Fruit(WINDOW *local_win, int *head_y, int *head_x){
+    Fruit(WINDOW *local_win){
         this-> local_win = local_win;
-        this-> snake_head_y = head_y;
-        this-> snake_head_x = head_x;
         update();
     }
     
-    bool isEaten(){
-        if(fruit_y == *snake_head_y && fruit_x == *snake_head_x) return true;
-        else return false;
+    int get_x(){
+        return fruit_x;
+    }
+    
+    int get_y(){
+        return fruit_y;
     }
     
     void update(){
@@ -36,5 +37,5 @@ public:
         wrefresh(local_win);
     }
     
-} fruit(game.gameArea, &snake.head_y, &snake.head_x);
+} fruit(game.gameArea);
 

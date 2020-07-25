@@ -41,6 +41,21 @@ public:
         body_x.pop_back();
     }
     
+    void show(){
+        std::list<int>::iterator y_it, x_it;
+        for(y_it=body_y.begin(), x_it=body_x.begin(); y_it!=body_y.end(); y_it++, x_it++){
+            wattron(local_win, COLOR_PAIR(2));
+            mvwprintw(local_win, *y_it, *x_it, "#");
+            wattroff(local_win, COLOR_PAIR(2));
+        }
+        wrefresh(local_win);
+    }
+    
+    bool hasEaten(Fruit fruit){
+        if(fruit.get_y() == head_y && fruit.get_x() == head_x) return true;
+        else return false;
+    }
+    
     void grow(){
         
         #define NEW_GROWING_IMP
@@ -56,16 +71,6 @@ public:
             body_y.push_front(head_y);
             body_x.push_front(head_x);
         #endif
-    }
-    
-    void show(){
-        std::list<int>::iterator y_it, x_it;
-        for(y_it=body_y.begin(), x_it=body_x.begin(); y_it!=body_y.end(); y_it++, x_it++){
-            wattron(local_win, COLOR_PAIR(2));
-            mvwprintw(local_win, *y_it, *x_it, "#");
-            wattroff(local_win, COLOR_PAIR(2));
-        }
-        wrefresh(local_win);
     }
     
     void showScore(){

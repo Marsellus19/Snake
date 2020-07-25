@@ -1,4 +1,3 @@
-//
 //  main.cpp
 //  Snake
 //
@@ -12,8 +11,9 @@
 #include <string>
 #include "game.h"
 #include "menus.h"
-#include "snake.h"
 #include "fruit.h"
+#include "snake.h"
+
 
 int main(int argc, const char * argv[]) {
     
@@ -29,11 +29,17 @@ int main(int argc, const char * argv[]) {
             snake.newSnake();
         }
         
+        if(snake.hasEaten(fruit)){
+            snake.grow();
+            fruit.update();
+        }
+        
+        /*
         if(fruit.isEaten()){
             fruit.update();
             snake.grow();
         }
-        
+        */
         snake.show();
         
         fruit.show();
