@@ -10,9 +10,9 @@
 #include <list>
 #include <string>
 #include "game.h"
-#include "menus.h"
 #include "fruit.h"
 #include "snake.h"
+#include "menus.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -20,31 +20,29 @@ int main(int argc, const char * argv[]) {
     while(game.play){
         game.refreshwin();
         
-        snake.update(game.getInput());
+        snake.move(game.getInput());
         
-        if(game.pause) main_menu.show();
+        if(game.pause && !game.end){
+            showPauseMenu();
+        }
+        if(game.pause && game.end){
+            showMainMenu();
+        }
         
         if(snake.isDead()){
-            main_menu.show();
-            snake.newSnake();
+            showDeadMenu();
         }
         
         if(snake.hasEaten(fruit)){
             snake.grow();
-            fruit.update();
+            fruit.newPos();
         }
         
-        /*
-        if(fruit.isEaten()){
-            fruit.update();
-            snake.grow();
-        }
-        */
         snake.show();
         
         fruit.show();
         
-        snake.showScore();
+        game.showScore(snake.getLength());
     }
     
     endwin();

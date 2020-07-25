@@ -8,13 +8,22 @@
 class Fruit{
     
     int fruit_x, fruit_y;
+    WINDOW *local_win;
     
 public:
-    WINDOW *local_win;
     
     Fruit(WINDOW *local_win){
         this-> local_win = local_win;
-        update();
+        newPos();
+    }
+    
+    Fruit(){
+        newPos();
+    }
+    
+    void newPos(){
+        fruit_x = ((rand() % 38) * 2) +2;
+        fruit_y = (rand() % 38) +1;
     }
     
     int get_x(){
@@ -25,15 +34,10 @@ public:
         return fruit_y;
     }
     
-    void update(){
-        fruit_x = ((rand() % 38) * 2) +2;
-        fruit_y = (rand() % 38) +1;
-    }
-    
     void show(){
-        wattron(local_win, COLOR_PAIR(1));
+        wattron(local_win, COLOR_PAIR(YELLOW));
         mvwprintw(local_win, fruit_y, fruit_x, "*");
-        wattroff(local_win, COLOR_PAIR(1));
+        wattroff(local_win, COLOR_PAIR(YELLOW));
         wrefresh(local_win);
     }
     

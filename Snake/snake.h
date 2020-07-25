@@ -11,19 +11,19 @@ class Snake{
     std::list<int> body_y;
     std::list<int> body_x;
     
+    int head_y;
+    int head_x;
+    
     WINDOW *local_win;
     
 public:
-    
-    int head_y;
-    int head_x;
     
     Snake(WINDOW *local_win){
         this-> local_win = local_win;
         newSnake();
     }
     
-    void update(Game::directions dir){
+    void move(Game::directions dir){
         this-> dir = dir;
         if(dir == Game::UP) head_y --;
         else if(dir == Game::RIGHT) head_x += 2;
@@ -44,9 +44,9 @@ public:
     void show(){
         std::list<int>::iterator y_it, x_it;
         for(y_it=body_y.begin(), x_it=body_x.begin(); y_it!=body_y.end(); y_it++, x_it++){
-            wattron(local_win, COLOR_PAIR(2));
+            wattron(local_win, COLOR_PAIR(CYAN));
             mvwprintw(local_win, *y_it, *x_it, "#");
-            wattroff(local_win, COLOR_PAIR(2));
+            wattroff(local_win, COLOR_PAIR(CYAN));
         }
         wrefresh(local_win);
     }
@@ -81,6 +81,11 @@ public:
         wrefresh(score_win);
     }
     
+    int getLength(){
+        int length = int(body_y.size());
+        return length;
+    }
+    
     bool isDead(){
         bool dead = false;
         std::list<int>::iterator y_it, x_it;
@@ -104,7 +109,6 @@ public:
         head_x = 40;
         body_y.push_front(head_y);
         body_x.push_front(head_x);
-        dir = Game::RIGHT;
     }
     
 }snake(game.gameArea);

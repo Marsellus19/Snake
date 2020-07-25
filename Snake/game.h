@@ -10,15 +10,14 @@ void defColors();
 class Game {
     
     const static int height = 50, width = 100;
-    const static int easy = 5, normal = 10, hard = 20; //fps for each difficulty
-    int fps = normal; //default fps when the game starts up
-    
-    enum difficulty {EASY = 0, NORMAL, HARD};
+    const static int easy = 5, normal = 10, extreme = 20; //fps for each difficulty
+    int fps = normal; //default fps for when the game starts up
     
 public:
     
+    enum difficulty {EASY = 0, NORMAL, EXTREME};
     enum directions {UP = 1, RIGHT, DOWN, LEFT} dir;
-    bool play, pause;
+    bool play, pause, end;
     
     WINDOW *gameArea;
     
@@ -31,7 +30,7 @@ public:
         else if(input == KEY_RIGHT && dir != LEFT) dir = RIGHT;
         else if(input == KEY_DOWN && dir != UP) dir = DOWN;
         else if(input == KEY_LEFT && dir != RIGHT) dir = LEFT;
-        else if(input == 27) pause = true; //escape key
+        else if(input == 27) pause = true; //esc key
         
         return dir;
     }
@@ -39,12 +38,20 @@ public:
     void setDifficulty(difficulty diff){
         if(diff == EASY) fps = easy;
         else if(diff == NORMAL) fps = normal;
-        else if(diff == HARD) fps = hard;
+        else if(diff == EXTREME) fps = extreme;
     }
     
     void drawBox(){
         box(gameArea, 0, 0);
         wrefresh(gameArea);
+    }
+    
+    void showScore(int score){
+        WINDOW *score_win;
+        score_win = newwin(5, 20, 0, 9);
+        
+        mvwprintw(score_win, 2, 0, "SCORE: %d", score);
+        wrefresh(score_win);
     }
     
     void refreshwin(){
@@ -68,6 +75,8 @@ Game::Game(){
     gameArea = newwin(height-10, width-19, 10/2, 19/2);
     play = true;
     pause = true;
+    end = true;
+    dir = RIGHT;
 }
 
 void defColors(){
