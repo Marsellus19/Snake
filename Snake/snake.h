@@ -122,25 +122,39 @@ public:
         progressFile << dir;
     }
     
-    //not working
+    //working sorta?
     void loadProgress(){
         body_y.clear();
         body_x.clear();
         
-        int data = NULL;
+        std::string dataLine;
+        std::string singleNum;
         
         std::ifstream progressFile;
         progressFile.open("/Users/marcel/Documents/XCode/Snake/game_progress.txt");
         
-        while(data != '\n'){
-            progressFile >> data;
-            body_y.push_back(data);
-        }
-        while(data != '\n'){
-            progressFile >> data;
-            body_x.push_back(data);
+        getline(progressFile, dataLine);
+        std::stringstream ss(dataLine);
+
+        while (ss >> singleNum){
+            body_y.push_back(std::stoi(singleNum));
         }
         
+        getline(progressFile, dataLine);
+        std::stringstream pp(dataLine);
+
+        while (pp >> singleNum){
+            body_x.push_back(std::stoi(singleNum));
+        }
+        
+        getline(progressFile, dataLine);
+        
+        dir = Game::directions(std::stoi(dataLine));
+        
+        head_y = body_y.front();
+        head_x = body_x.front();
+        
+        progressFile.close();
     }
     
 }snake(game.gameArea);

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <ncurses.h>
 #include <list>
 #include <string>
@@ -44,6 +45,8 @@ int main(int argc, const char * argv[]) {
         }
         
         if(game.pause && !game.end){
+            snake.saveProgress();
+            
             switch(PauseMenu::action(pause_menu.show())){
                 case PauseMenu::GO_BACK:
                     game.pause = false;
@@ -79,6 +82,7 @@ int main(int argc, const char * argv[]) {
                 case MainMenu::LOAD_GAME:
                     game.pause = false;
                     game.end = false;
+                    snake.loadProgress();
                     break;
                 case MainMenu::EXIT_GAME:
                     game.play = false;
@@ -94,8 +98,6 @@ int main(int argc, const char * argv[]) {
         snake.show();
         
         fruit.show();
-        
-        snake.saveProgress();
         
         game.showScore(snake.getLength());
     }
