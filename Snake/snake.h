@@ -58,19 +58,19 @@ public:
     
     void grow(){
         
-        #define NEW_GROWING_IMP
+#define NEW_GROWING_IMP
         
-        #ifdef NEW_GROWING_IMP
-            body_y.push_back(body_y.back());
-            body_x.push_back(body_x.back());
-        #endif
+#ifdef NEW_GROWING_IMP
+        body_y.push_back(body_y.back());
+        body_x.push_back(body_x.back());
+#endif
         
         /* Old implementation, waits for the tail to reach the fruit      */
         /* position before grownig on screen. The newer one above doesn't */
-        #ifndef NEW_GROWING_IMP
-            body_y.push_front(head_y);
-            body_x.push_front(head_x);
-        #endif
+#ifndef NEW_GROWING_IMP
+        body_y.push_front(head_y);
+        body_x.push_front(head_x);
+#endif
     }
     
     void showScore(){

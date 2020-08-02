@@ -5,7 +5,7 @@
 //  Copyright © 2020 Marcel. All rights reserved.
 //
 
-void defColors();
+//void defColors();
 
 class Game {
     
@@ -21,7 +21,21 @@ public:
     
     WINDOW *gameArea;
     
-    Game(); //just a definition, look below
+    Game(){
+        system("printf '\e[8;50;100t'"); //resize the teminal window to 100x50
+        initscr(); //initialize ncurses library
+        resizeterm(height, width);
+        refresh();
+        keypad(stdscr, TRUE); //enable arrow keys for ncurses
+        nodelay(stdscr, true); //don't wait for input
+        curs_set(0); //hide cursor
+        defColors();
+        gameArea = newwin(height-10, width-19, 10/2, 19/2);
+        play = true;
+        pause = true;
+        end = true;
+        dir = RIGHT;
+}
     
     directions getInput(){
         int input;
@@ -61,35 +75,19 @@ public:
         clear();
     }
     
+    void defColors(){
+        use_default_colors();
+        start_color();
+        
+        #define YELLOW 1
+        #define CYAN 2
+        #define RED 3
+        #define BLUE 4
+        
+        init_pair(1, COLOR_YELLOW, -1);
+        init_pair(2, COLOR_CYAN, -1);
+        init_pair(3, COLOR_RED, -1);
+        init_pair(4, COLOR_BLUE, -1);
+    }
+    
 }game;
-
-Game::Game(){
-    system("printf '\e[8;50;100t'"); //resize the window to 100x50
-    initscr(); //initialize ncurses library
-    resizeterm(height, width);
-    refresh();
-    keypad(stdscr, TRUE); //enable arrow keys for ncurses
-    nodelay(stdscr, true); //don't wait for input
-    curs_set(0); //hide cursor
-    defColors();
-    gameArea = newwin(height-10, width-19, 10/2, 19/2);
-    play = true;
-    pause = true;
-    end = true;
-    dir = RIGHT;
-}
-
-void defColors(){
-    use_default_colors();
-    start_color();
-    
-    #define YELLOW 1
-    #define CYAN 2
-    #define RED 3
-    #define BLUE 4
-    
-    init_pair(1, COLOR_YELLOW, -1);
-    init_pair(2, COLOR_CYAN, -1);
-    init_pair(3, COLOR_RED, -1);
-    init_pair(4, COLOR_BLUE, -1);
-}
