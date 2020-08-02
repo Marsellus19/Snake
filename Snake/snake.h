@@ -58,27 +58,19 @@ public:
     
     void grow(){
         
-#define NEW_GROWING_IMP
+        #define NEW_GROWING_IMP
         
-#ifdef NEW_GROWING_IMP
-        body_y.push_back(body_y.back());
-        body_x.push_back(body_x.back());
-#endif
+        #ifdef NEW_GROWING_IMP
+            body_y.push_back(body_y.back());
+            body_x.push_back(body_x.back());
+        #endif
         
-        /* Old implementation, waits for the tail to reach the fruit      */
-        /* position before grownig on screen. The newer one above doesn't */
-#ifndef NEW_GROWING_IMP
-        body_y.push_front(head_y);
-        body_x.push_front(head_x);
-#endif
-    }
-    
-    void showScore(){
-        WINDOW *score_win;
-        score_win = newwin(5, 20, 0, 9);
-        
-        mvwprintw(score_win, 2, 0, "SCORE: %d", body_y.size());
-        wrefresh(score_win);
+        /* Old implementation, waits for the tail to reach the fruit position before grownig on screen.  */
+        /* The newer one above doesn't                                                                   */
+        #ifndef NEW_GROWING_IMP
+            body_y.push_front(head_y);
+            body_x.push_front(head_x);
+        #endif
     }
     
     int getLength(){
@@ -109,6 +101,46 @@ public:
         head_x = 40;
         body_y.push_front(head_y);
         body_x.push_front(head_x);
+    }
+    
+    void saveProgress(){
+        std::ofstream progressFile;
+        progressFile.open("/Users/marcel/Documents/XCode/Snake/game_progress.txt");
+        
+        std::list<int>::iterator y_it, x_it;
+        for(y_it=body_y.begin(); y_it!=body_y.end(); y_it++){
+            progressFile << int(*y_it) << " ";
+        }
+        
+        progressFile << "\n";
+        
+        for(x_it=body_x.begin(); x_it!=body_x.end(); x_it++){
+            progressFile << int(*x_it) << " ";
+        }
+        
+        progressFile << "\n";
+        progressFile << dir;
+    }
+    
+    //not working
+    void loadProgress(){
+        body_y.clear();
+        body_x.clear();
+        
+        int data = NULL;
+        
+        std::ifstream progressFile;
+        progressFile.open("/Users/marcel/Documents/XCode/Snake/game_progress.txt");
+        
+        while(data != '\n'){
+            progressFile >> data;
+            body_y.push_back(data);
+        }
+        while(data != '\n'){
+            progressFile >> data;
+            body_x.push_back(data);
+        }
+        
     }
     
 }snake(game.gameArea);

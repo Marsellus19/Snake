@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include <ncurses.h>
 #include <list>
 #include <string>
@@ -93,6 +94,8 @@ int main(int argc, const char * argv[]) {
         snake.show();
         
         fruit.show();
+        
+        snake.saveProgress();
         
         game.showScore(snake.getLength());
     }

@@ -5,8 +5,6 @@
 //  Copyright © 2020 Marcel. All rights reserved.
 //
 
-//void defColors();
-
 class Game {
     
     const static int height = 50, width = 100;
