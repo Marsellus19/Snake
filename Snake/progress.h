@@ -31,7 +31,7 @@ public:
         }
         
         progressFile << "\n";
-        progressFile << snake.getDir();
+        progressFile << game.getInput();
         progressFile << "\n";
         
         

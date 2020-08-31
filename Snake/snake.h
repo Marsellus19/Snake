@@ -6,8 +6,6 @@
 
 class Snake{
     
-    Game::directions dir;
-    
     std::list<int> body_y;
     std::list<int> body_x;
     
@@ -24,7 +22,6 @@ public:
     }
     
     void move(Game::directions dir){
-        this-> dir = dir;
         if(dir == Game::UP) head_y --;
         else if(dir == Game::RIGHT) head_x += 2;
         else if(dir == Game::DOWN ) head_y ++;
@@ -88,10 +85,6 @@ public:
         return ptr;
     }
     
-    Game::directions getDir(){
-        return dir;
-    }
-    
     void setBody_y(std::list<int> body_y){
         this-> body_y = body_y;
     }
@@ -106,10 +99,6 @@ public:
     
     void setHead_x(int head_x){
         this->head_x = head_x;
-    }
-    
-    void setDir(Game::directions dir){
-        this-> dir = dir;
     }
     
     bool isDead(){
