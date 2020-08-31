@@ -15,15 +15,18 @@ public:
         
         
         /* Save snake body coordinates and the direction */
+        
+        std::list<int> body_y = *snake.getBodyPtr_y();
+        std::list<int> body_x = *snake.getBodyPtr_x();
         std::list<int>::iterator y_it, x_it;
         
-        for((*snake.getBodyPtr_y()).begin(); y_it!=(*snake.getBodyPtr_y()).end(); y_it++){
+        for(y_it=body_y.begin(); y_it!=body_y.end(); y_it++){
             progressFile << int(*y_it) << " ";
         }
         
         progressFile << "\n";
         
-        for(x_it=(*snake.getBodyPtr_y()).begin(); x_it!=(*snake.getBodyPtr_y()).end(); x_it++){
+        for(x_it=body_x.begin(); x_it!=body_x.end(); x_it++){
             progressFile << int(*x_it) << " ";
         }
         
