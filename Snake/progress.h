@@ -36,11 +36,11 @@ public:
         
         
         /* Save fruit coordinates */
-        progressFile << fruit.get_y() << " " << fruit.get_x();
+        progressFile << fruit.get_y() << "\n" << fruit.get_x();
         progressFile << "\n";
         
         /* Save game difficulty */
-        progressFile << game.getDifficulty();
+        progressFile << game.getFps ();
         progressFile << "\n";
         
         progressFile.close();
@@ -48,11 +48,58 @@ public:
     }
     
     
-    void load(){
+    void load(Game &game, Snake &snake, Fruit &fruit){
         
+        std::string dataLine;
+        std::string singleNum;
+        
+        std::ifstream progressFile;
+        progressFile.open("/Users/marcel/Documents/XCode/Snake/game_progress.txt");
+        
+        /* Load snake body coordinates and set the direction */
+        std::list<int> body_y = *snake.getBodyPtr_y();
+        std::list<int> body_x = *snake.getBodyPtr_x();
+        body_y.clear();
+        body_x.clear();
+        
+        getline(progressFile, dataLine);
+        std::stringstream ss(dataLine);
+
+        while (ss >> singleNum){
+            body_y.push_back(std::stoi(singleNum));
+        }
+        
+        snake.setBody_y(body_y);
+        
+        getline(progressFile, dataLine);
+        std::stringstream pp(dataLine);
+
+        while (pp >> singleNum){
+            body_x.push_back(std::stoi(singleNum));
+        }
+        
+        snake.setBody_x(body_x);
+        
+        snake.setHead_y(body_y.front());
+        snake.setHead_x(body_x.front());
+        
+        getline(progressFile, dataLine);
+        game.setDirection(Game::directions(std::stoi(dataLine)));
+        
+        
+        /* Load fruit coordinates */
+        getline(progressFile, dataLine);
+        fruit.set_y(std::stoi(dataLine));
+        getline(progressFile, dataLine);
+        fruit.set_x(std::stoi(dataLine));
+        
+        
+        /* Load game difficulty */
+        getline(progressFile, dataLine);
+        game.setFps(std::stoi(dataLine));
+        
+        progressFile.close();
         
     }
 
-    
-    
 }progress;

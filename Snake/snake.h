@@ -92,6 +92,26 @@ public:
         return dir;
     }
     
+    void setBody_y(std::list<int> body_y){
+        this-> body_y = body_y;
+    }
+    
+    void setBody_x(std::list<int> body_x){
+        this-> body_x = body_x;
+    }
+    
+    void setHead_y(int head_y){
+        this->head_y = head_y;
+    }
+    
+    void setHead_x(int head_x){
+        this->head_x = head_x;
+    }
+    
+    void setDir(Game::directions dir){
+        this-> dir = dir;
+    }
+    
     bool isDead(){
         bool dead = false;
         std::list<int>::iterator y_it, x_it;
@@ -115,61 +135,6 @@ public:
         head_x = 40;
         body_y.push_front(head_y);
         body_x.push_front(head_x);
-    }
-    
-    void saveProgress(){
-        std::ofstream progressFile;
-        progressFile.open("/Users/marcel/Documents/XCode/Snake/game_progress.txt");
-        
-        std::list<int>::iterator y_it, x_it;
-        for(y_it=body_y.begin(); y_it!=body_y.end(); y_it++){
-            progressFile << int(*y_it) << " ";
-        }
-        
-        progressFile << "\n";
-        
-        for(x_it=body_x.begin(); x_it!=body_x.end(); x_it++){
-            progressFile << int(*x_it) << " ";
-        }
-        
-        progressFile << "\n";
-        progressFile << dir;
-        progressFile.close();
-    }
-    
-    //working sorta?
-    void loadProgress(){
-        body_y.clear();
-        body_x.clear();
-        
-        std::string dataLine;
-        std::string singleNum;
-        
-        std::ifstream progressFile;
-        progressFile.open("/Users/marcel/Documents/XCode/Snake/game_progress.txt");
-        
-        getline(progressFile, dataLine);
-        std::stringstream ss(dataLine);
-
-        while (ss >> singleNum){
-            body_y.push_back(std::stoi(singleNum));
-        }
-        
-        getline(progressFile, dataLine);
-        std::stringstream pp(dataLine);
-
-        while (pp >> singleNum){
-            body_x.push_back(std::stoi(singleNum));
-        }
-        
-        getline(progressFile, dataLine);
-        
-        dir = Game::directions(std::stoi(dataLine));
-        
-        head_y = body_y.front();
-        head_x = body_x.front();
-        
-        progressFile.close();
     }
     
 }snake(game.gameArea);

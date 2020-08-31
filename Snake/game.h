@@ -15,7 +15,6 @@ public:
     
 private:
     
-    difficulty diff;
     directions dir;
     
     const static int height = 50, width = 100;
@@ -52,15 +51,22 @@ public:
         return dir;
     }
     
+    void setDirection(directions dir){
+        this-> dir = dir;
+    }
+    
     void setDifficulty(difficulty diff){
-        this-> diff = diff;
         if(diff == EASY) fps = easy;
         else if(diff == NORMAL) fps = normal;
         else if(diff == EXTREME) fps = extreme;
     }
     
-    difficulty getDifficulty(){
-        return diff;
+    int getFps(){
+        return fps;
+    }
+    
+    void setFps(int fps){
+        this-> fps = fps;
     }
     
     void drawBox(){

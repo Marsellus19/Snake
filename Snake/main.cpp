@@ -46,7 +46,6 @@ int main(int argc, const char * argv[]) {
         }
         
         if(game.pause && !game.end){
-            //snake.saveProgress();
             progress.save(game, snake, fruit);
             
             switch(PauseMenu::action(pause_menu.show())){
@@ -84,7 +83,7 @@ int main(int argc, const char * argv[]) {
                 case MainMenu::LOAD_GAME:
                     game.pause = false;
                     game.end = false;
-                    snake.loadProgress();
+                    progress.load(game, snake, fruit);
                     break;
                 case MainMenu::EXIT_GAME:
                     game.play = false;
