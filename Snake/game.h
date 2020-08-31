@@ -6,6 +6,17 @@
 //
 
 class Game {
+public:
+    
+    enum difficulty {EASY = 0, NORMAL, EXTREME};
+    enum directions {UP = 1, RIGHT, DOWN, LEFT};
+    bool play, pause, end;
+    WINDOW *gameArea;
+    
+private:
+    
+    difficulty diff;
+    directions dir;
     
     const static int height = 50, width = 100;
     const static int easy = 5, normal = 10, extreme = 20; //fps for each difficulty
@@ -13,18 +24,12 @@ class Game {
     
 public:
     
-    enum difficulty {EASY = 0, NORMAL, EXTREME};
-    enum directions {UP = 1, RIGHT, DOWN, LEFT} dir;
-    bool play, pause, end;
-    
-    WINDOW *gameArea;
-    
     Game(){
         system("printf '\e[8;50;100t'"); //resize the teminal window to 100x50
         initscr(); //initialize ncurses library
         resizeterm(height, width);
         refresh();
-        keypad(stdscr, TRUE); //enable arrow keys for ncurses
+        keypad(stdscr, true); //enable arrow keys for ncurses
         nodelay(stdscr, true); //don't wait for input
         curs_set(0); //hide cursor
         defColors();
@@ -33,7 +38,7 @@ public:
         pause = true;
         end = true;
         dir = RIGHT;
-}
+    }
     
     directions getInput(){
         int input;
@@ -48,14 +53,19 @@ public:
     }
     
     void setDifficulty(difficulty diff){
+        this-> diff = diff;
         if(diff == EASY) fps = easy;
         else if(diff == NORMAL) fps = normal;
         else if(diff == EXTREME) fps = extreme;
     }
     
+    difficulty getDifficulty(){
+        return diff;
+    }
+    
     void drawBox(){
         box(gameArea, 0, 0);
-        wrefresh(gameArea);
+        //wrefresh(gameArea);
     }
     
     void showScore(int score){
@@ -68,6 +78,7 @@ public:
     
     void refreshwin(){
         drawBox();
+        wrefresh(gameArea);
         napms(1000 / fps);
         werase(gameArea);
         clear();

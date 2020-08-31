@@ -34,11 +34,19 @@ public:
         return fruit_y;
     }
     
+    void set_x(int x){
+        fruit_x = x;
+    }
+    
+    void set_y(int y){
+        fruit_y = y;
+    }
+    
     void show(){
         wattron(local_win, COLOR_PAIR(YELLOW));
         mvwprintw(local_win, fruit_y, fruit_x, "*");
         wattroff(local_win, COLOR_PAIR(YELLOW));
-        wrefresh(local_win);
+        //wrefresh(local_win);
     }
     
 } fruit(game.gameArea);

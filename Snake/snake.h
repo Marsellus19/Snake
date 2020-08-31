@@ -48,7 +48,7 @@ public:
             mvwprintw(local_win, *y_it, *x_it, "#");
             wattroff(local_win, COLOR_PAIR(CYAN));
         }
-        wrefresh(local_win);
+        //wrefresh(local_win);
     }
     
     bool hasEaten(Fruit fruit){
@@ -76,6 +76,20 @@ public:
     int getLength(){
         int length = int(body_y.size());
         return length;
+    }
+    
+    std::list<int> *getBodyPtr_y(){
+        std::list<int> *ptr = &body_y;
+        return ptr;
+    }
+    
+    std::list<int> *getBodyPtr_x(){
+        std::list<int> *ptr = &body_x;
+        return ptr;
+    }
+    
+    Game::directions getDir(){
+        return dir;
     }
     
     bool isDead(){
@@ -120,6 +134,7 @@ public:
         
         progressFile << "\n";
         progressFile << dir;
+        progressFile.close();
     }
     
     //working sorta?

@@ -119,3 +119,61 @@ public:
     
 }dead_menu;
 
+
+template<typename T>
+
+class BetterMenu : public T{
+protected:
+    WINDOW *menu_win;
+    
+    int numberOfMenuItems;
+    std::string *itemName;
+    std::string menuMessage;
+    
+    void printInTheMiddle(WINDOW *local_win, int height, std::string text){
+        unsigned long stringLength = text.size();
+        mvwprintw(local_win, height, (40-((int)stringLength/2)), "%s", text.c_str());
+    }
+
+public:
+    
+    int show(){
+        bool menuActiv = true;
+        int menuItem = 0;
+        menu_win = newwin(20, 80, 5, 10);
+        
+        while(menuActiv){
+            napms(1000 / 10);
+            werase(menu_win);
+            clear();
+            box(menu_win, 0, 0);
+            
+            int input;
+            input = getch();
+            
+            if(input == KEY_UP || input == KEY_LEFT) menuItem--;
+            else if(input == KEY_DOWN || input == KEY_RIGHT) menuItem++;
+            else if(input == 10) menuActiv = false; //Enter key
+            
+            if(menuItem == -1) menuItem = numberOfMenuItems - 1;
+            else if(menuItem == numberOfMenuItems) menuItem = 0;
+            
+            printInTheMiddle(menu_win, 5, menuMessage);
+            
+            for(int i=0; i<numberOfMenuItems; i++){
+                if(menuItem != i)printInTheMiddle(menu_win, 10 + i, itemName[i]);
+            }
+            
+            wattron(menu_win, COLOR_PAIR(CYAN));
+            printInTheMiddle(menu_win, 10+menuItem, itemName[menuItem]);
+            wattroff(menu_win, COLOR_PAIR(CYAN));
+            
+            wrefresh(menu_win);
+        }
+        
+        return menuItem;
+    }
+    
+    
+    
+};

@@ -15,6 +15,7 @@
 #include "fruit.h"
 #include "snake.h"
 #include "menus.h"
+#include "progress.h"
 
 
 int main(int argc, const char * argv[]) {
@@ -45,7 +46,8 @@ int main(int argc, const char * argv[]) {
         }
         
         if(game.pause && !game.end){
-            snake.saveProgress();
+            //snake.saveProgress();
+            progress.save(game, snake, fruit);
             
             switch(PauseMenu::action(pause_menu.show())){
                 case PauseMenu::GO_BACK:

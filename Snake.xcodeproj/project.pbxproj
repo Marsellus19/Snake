@@ -24,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F052E6124FD55520096B6F5 /* progress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = progress.h; sourceTree = "<group>"; };
 		1F3B641624604616007EFBF5 /* Snake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Snake; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3B641924604616007EFBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FDB735524618F1D001FD332 /* libncurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libncurses.tbd; path = usr/lib/libncurses.tbd; sourceTree = SDKROOT; };
@@ -72,6 +73,7 @@
 				1FDB735724618F54001FD332 /* snake.h */,
 				1FE2EAC424CC68F500D8527B /* fruit.h */,
 				1FE2EAC224CB2D0B00D8527B /* to_do */,
+				1F052E6124FD55520096B6F5 /* progress.h */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
