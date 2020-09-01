@@ -10,8 +10,9 @@ protected:
     WINDOW *menu_win;
     
     int numberOfMenuItems;
-    std::string *itemName;
+    //std::string *itemName;
     std::string menuMessage;
+    int currentItem;
     
     void printInTheMiddle(WINDOW *local_win, int height, std::string text){
         unsigned long stringLength = text.size();
@@ -19,127 +20,48 @@ protected:
     }
  
 public:
-    int show(){
-        bool menuActiv = true;
-        int menuItem = 0;
-        menu_win = newwin(20, 80, 5, 10);
-        
-        while(menuActiv){
-            napms(1000 / 10);
-            werase(menu_win);
-            clear();
-            box(menu_win, 0, 0);
-            
-            int input;
-            input = getch();
-            
-            if(input == KEY_UP || input == KEY_LEFT) menuItem--;
-            else if(input == KEY_DOWN || input == KEY_RIGHT) menuItem++;
-            else if(input == 10) menuActiv = false; //Enter key
-            
-            if(menuItem == -1) menuItem = numberOfMenuItems - 1;
-            else if(menuItem == numberOfMenuItems) menuItem = 0;
-            
-            printInTheMiddle(menu_win, 5, menuMessage);
-            
-            for(int i=0; i<numberOfMenuItems; i++){
-                if(menuItem != i)printInTheMiddle(menu_win, 10 + i, itemName[i]);
-            }
-            
-            wattron(menu_win, COLOR_PAIR(CYAN));
-            printInTheMiddle(menu_win, 10+menuItem, itemName[menuItem]);
-            wattroff(menu_win, COLOR_PAIR(CYAN));
-            
-            wrefresh(menu_win);
-        }
-        
-        return menuItem;
-    }
-
-};
-
-class MainMenu: public Menu{
-public:
-    MainMenu(){
-        numberOfMenuItems = 3;
-        menuMessage = "Welcome to the game of snake!";
-        itemName = new std::string[numberOfMenuItems];
-        itemName[0] = "New Game";
-        itemName[1] = "Load Game";
-        itemName[2] = "Exit Game";
-    }
-    
-    enum action{NEW_GAME = 0, LOAD_GAME, EXIT_GAME};
-    
-}main_menu;
-
-class DifficultyMenu: public Menu{
-public:
-    
-    DifficultyMenu(){
-        numberOfMenuItems = 3;
-        menuMessage = "Choose difficulty";
-        itemName = new std::string[numberOfMenuItems];
-        itemName[0] = "Easy";
-        itemName[1] = "Normal";
-        itemName[2] = "Extreme";
-    }
-    
-    enum action{EASY = 0, NORMAL, EXTREME};
-    
-}difficulty_menu;
-
-class PauseMenu: public Menu{
-public:
-    PauseMenu(){
-        numberOfMenuItems = 3;
-        menuMessage = "Paused";
-        itemName = new std::string[numberOfMenuItems];
-        itemName[0] = "Go Back";
-        itemName[1] = "Main Menu";
-        itemName[2] = "Exit Game";
-    }
-    
-    enum action{GO_BACK = 0, MAIN_MENU, EXIT_GAME};
-    
-}pause_menu;
-
-class DeadMenu: public Menu{
-public:
-    DeadMenu(){
-        numberOfMenuItems = 3;
-        menuMessage = "Game Over!!!";
-        itemName = new std::string[numberOfMenuItems];
-        itemName[0] = "Play Again";
-        itemName[1] = "Main Menu";
-        itemName[2] = "Exit Game";
-    }
-    
-    enum action{PLAY_AGAIN = 0, MAIN_MENU, EXIT_GAME};
-    
-}dead_menu;
-
-
-template<typename T>
-
-class BetterMenu : public T{
-protected:
-    WINDOW *menu_win;
-    
-    int numberOfMenuItems;
     std::string *itemName;
-    std::string menuMessage;
     
-    void printInTheMiddle(WINDOW *local_win, int height, std::string text){
-        unsigned long stringLength = text.size();
-        mvwprintw(local_win, height, (40-((int)stringLength/2)), "%s", text.c_str());
+    Menu(){
+        
     }
-
-public:
+    
+    /* Constructors that can be used to define any menu with a list of 2,3 or 4 menu items */
+    
+    Menu(std::string message, std::string item_0, std::string item_1){
+        numberOfMenuItems = 2;
+        itemName = new std::string[numberOfMenuItems];
+        menuMessage = message;
+        itemName[0] = item_0;
+        itemName[1] = item_1;
+    }
+    
+    Menu(std::string message, std::string item_0, std::string item_1, std::string item_2){
+        numberOfMenuItems = 3;
+        itemName = new std::string[numberOfMenuItems];
+        menuMessage = message;
+        itemName[0] = item_0;
+        itemName[1] = item_1;
+        itemName[2] = item_2;
+    }
+    
+    Menu(std::string message, std::string item_0, std::string item_1, std::string item_2, std::string item_3){
+        numberOfMenuItems = 4;
+        itemName = new std::string[numberOfMenuItems];
+        menuMessage = message;
+        itemName[0] = item_0;
+        itemName[1] = item_1;
+        itemName[2] = item_2;
+        itemName[3] = item_3;
+    }
+    
+    int getSelectedItem(){
+        return currentItem;
+    }
     
     int show(){
         bool menuActiv = true;
-        int menuItem = 0;
+        currentItem = 0;
         menu_win = newwin(20, 80, 5, 10);
         
         while(menuActiv){
@@ -151,29 +73,35 @@ public:
             int input;
             input = getch();
             
-            if(input == KEY_UP || input == KEY_LEFT) menuItem--;
-            else if(input == KEY_DOWN || input == KEY_RIGHT) menuItem++;
+            if(input == KEY_UP || input == KEY_LEFT) currentItem--;
+            else if(input == KEY_DOWN || input == KEY_RIGHT) currentItem++;
             else if(input == 10) menuActiv = false; //Enter key
             
-            if(menuItem == -1) menuItem = numberOfMenuItems - 1;
-            else if(menuItem == numberOfMenuItems) menuItem = 0;
+            if(currentItem == -1) currentItem = numberOfMenuItems - 1;
+            else if(currentItem == numberOfMenuItems) currentItem = 0;
             
             printInTheMiddle(menu_win, 5, menuMessage);
             
             for(int i=0; i<numberOfMenuItems; i++){
-                if(menuItem != i)printInTheMiddle(menu_win, 10 + i, itemName[i]);
+                if(currentItem != i)printInTheMiddle(menu_win, 10 + i, itemName[i]);
             }
             
             wattron(menu_win, COLOR_PAIR(CYAN));
-            printInTheMiddle(menu_win, 10+menuItem, itemName[menuItem]);
+            printInTheMiddle(menu_win, 10+currentItem, itemName[currentItem]);
             wattroff(menu_win, COLOR_PAIR(CYAN));
             
             wrefresh(menu_win);
         }
         
-        return menuItem;
+        return currentItem;
     }
-    
-    
-    
+
 };
+
+Menu mainMenu("Welcome to the game of snake!", "New Game", "Load Game", "Exit Game");
+
+Menu difficultyMenu("Choose difficulty", "Easy", "Normal", "Extreme");
+
+Menu pauseMenu("Paused!", "Go Back", "Main Menu", "Exit Game");
+
+Menu deadMenu("Game Over!!!", "Play Again", "Main Menu", "Exit Game");
