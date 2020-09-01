@@ -62,8 +62,9 @@ public:
             body_x.push_back(body_x.back());
         #endif
         
-        /* Old implementation, waits for the tail to reach the fruit position before grownig on screen.  */
-        /* The newer one above doesn't                                                                   */
+        // Old implementation, waits for the tail to reach the fruit position before grownig on screen.
+        // The newer one above doesn't.
+        // They both work fine. They just look different.
         #ifndef NEW_GROWING_IMP
             body_y.push_front(head_y);
             body_x.push_front(head_x);
@@ -71,18 +72,15 @@ public:
     }
     
     int getLength(){
-        int length = int(body_y.size());
-        return length;
+        return int(body_y.size());
     }
     
     std::list<int> *getBodyPtr_y(){
-        std::list<int> *ptr = &body_y;
-        return ptr;
+        return &body_y;
     }
     
     std::list<int> *getBodyPtr_x(){
-        std::list<int> *ptr = &body_x;
-        return ptr;
+        return &body_x;
     }
     
     void setBody_y(std::list<int> body_y){

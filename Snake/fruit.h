@@ -34,12 +34,12 @@ public:
         return fruit_y;
     }
     
-    void set_x(int x){
-        fruit_x = x;
+    void set_y(int fruit_y){
+        this-> fruit_y = fruit_y;
     }
     
-    void set_y(int y){
-        fruit_y = y;
+    void set_x(int fruit_x){
+        this-> fruit_x = fruit_x;
     }
     
     void show(){
