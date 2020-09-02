@@ -30,7 +30,6 @@
 		1FDB735524618F1D001FD332 /* libncurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libncurses.tbd; path = usr/lib/libncurses.tbd; sourceTree = SDKROOT; };
 		1FDB735724618F54001FD332 /* snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = snake.h; sourceTree = "<group>"; };
 		1FE2EAC124CB29FC00D8527B /* menus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menus.h; sourceTree = "<group>"; };
-		1FE2EAC224CB2D0B00D8527B /* to_do */ = {isa = PBXFileReference; lastKnownFileType = text; path = to_do; sourceTree = "<group>"; };
 		1FE2EAC324CC652200D8527B /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
 		1FE2EAC424CC68F500D8527B /* fruit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fruit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,7 +71,6 @@
 				1FE2EAC124CB29FC00D8527B /* menus.h */,
 				1FDB735724618F54001FD332 /* snake.h */,
 				1FE2EAC424CC68F500D8527B /* fruit.h */,
-				1FE2EAC224CB2D0B00D8527B /* to_do */,
 				1F052E6124FD55520096B6F5 /* progress.h */,
 			);
 			path = Snake;

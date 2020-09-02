@@ -20,77 +20,79 @@
 
 int main(int argc, const char * argv[]) {
     
-    while(game.play){
+    while(game.isActive()){
         game.refreshwin();
         
         snake.move(game.getInput());
         
         if(snake.isDead()){
-            int item = deadMenu.show();
-            if(deadMenu.itemName[item] == "Play Again"){
-                game.pause = false;
-                game.end = false;
+            progress.wipe();
+            deadMenu.show();
+            
+            if(deadMenu.outcome() == "Play Again"){
+                game.resume();
+                game.start();
                 snake.newSnake();
                 fruit.newPos();
             }
-            else if(deadMenu.itemName[item] == "Main Menu"){
-                game.pause = true;
-                game.end = true;
+            else if(deadMenu.outcome() == "Main Menu"){
+                game.pause();
+                game.end();
             }
-            else if(deadMenu.itemName[item] == "Exit Game"){
-                game.play = false;
-            }
-        }
-        
-        if(game.pause && !game.end){
-            progress.save(game, snake, fruit);
-            
-            int item = pauseMenu.show();
-            
-            if(pauseMenu.itemName[item] == "Go Back"){
-                game.pause = false;
-            }
-            else if(pauseMenu.itemName[item] == "Main Menu"){
-                game.end = true;
-            }
-            else if(pauseMenu.itemName[item] == "Exit Game"){
-                game.play = false;
-            }
-        }
-        
-        if(game.pause && game.end){
-            int item = mainMenu.show();
-            
-            if(mainMenu.itemName[item] == "New Game"){
-                game.pause = false;
-                game.end = false;
-                snake.newSnake();
-                fruit.newPos();
-                int newItem = difficultyMenu.show();
-                
-                if(difficultyMenu.itemName[newItem] == "Easy"){
-                    game.setDifficulty(Game::EASY);
-                }
-                else if(difficultyMenu.itemName[newItem] == "Normal"){
-                    game.setDifficulty(Game::NORMAL);
-                }
-                else if(difficultyMenu.itemName[newItem] == "Extreme"){
-                    game.setDifficulty(Game::EXTREME);
-                }
-            }
-            else if(mainMenu.itemName[item] == "Load Game"){
-                game.pause = false;
-                game.end = false;
-                progress.load(game, snake, fruit);
-            }
-            else if(mainMenu.itemName[item] == "Exit Game"){
-                game.play = false;
+            else if(deadMenu.outcome() == "Exit Game"){
+                game.exit();
             }
         }
         
         if(snake.hasEaten(fruit)){
             snake.grow();
             fruit.newPos();
+        }
+        
+        if(game.isPaused() && !game.hasEnded()){
+            progress.save(game, snake, fruit);
+            
+            pauseMenu.show();
+            
+            if(pauseMenu.outcome() == "Go Back"){
+                game.resume();
+            }
+            else if(pauseMenu.outcome() == "Main Menu"){
+                game.end();
+            }
+            else if(pauseMenu.outcome() == "Exit Game"){
+                game.exit();
+            }
+        }
+        
+        if(game.isPaused() && game.hasEnded()){
+            mainMenu.show();
+            
+            if(mainMenu.outcome() == "New Game"){
+                game.resume();
+                game.start();
+                snake.newSnake();
+                fruit.newPos();
+                difficultyMenu.show();
+                
+                if(difficultyMenu.outcome() == "Easy"){
+                    game.setDifficulty(Game::EASY);
+                }
+                else if(difficultyMenu.outcome() == "Normal"){
+                    game.setDifficulty(Game::NORMAL);
+                }
+                else if(difficultyMenu.outcome() == "Extreme"){
+                    game.setDifficulty(Game::EXTREME);
+                }
+            }
+            else if(mainMenu.outcome() == "Load Game"){
+                game.resume();
+                game.start();
+                progress.load(game, snake, fruit);
+            }
+            else if(mainMenu.outcome() == "Exit Game"){
+                game.exit();
+            }
         }
         
         snake.show();
