@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
             
             if(deadMenu.outcome() == "Play Again"){
                 game.resume();
-                game.start();
+                game.newGame();
                 snake.newSnake();
                 fruit.newPos();
             }
@@ -66,12 +66,13 @@ int main(int argc, const char * argv[]) {
             }
         }
         
+        mainMenu:
         if(game.isPaused() && game.hasEnded()){
             mainMenu.show();
             
             if(mainMenu.outcome() == "New Game"){
                 game.resume();
-                game.start();
+                game.newGame();
                 snake.newSnake();
                 fruit.newPos();
                 difficultyMenu.show();
@@ -87,11 +88,14 @@ int main(int argc, const char * argv[]) {
                 }
             }
             else if(mainMenu.outcome() == "Load Game"){
-                if(progress.fileNotFound()) mainMenu.showError("No game progress saved", "Hit enter to go back");
+                if(progress.fileNotFound()){
+                    mainMenu.showError("No game progress saved", "Hit enter to go back");
+                    goto mainMenu;
+                }
                 else{
                     progress.load(game, snake, fruit);
                     game.resume();
-                    game.start();
+                    game.newGame();
                 }
                 
             }

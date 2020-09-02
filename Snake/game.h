@@ -30,7 +30,7 @@ public:
     bool isPaused();
     
     void end();
-    void start();
+    void newGame();
     bool hasEnded();
     
     bool isActive();
@@ -68,35 +68,35 @@ Game::directions Game::getInput(){
     return dir;
 }
 
-void Game::pause(){
+inline void Game::pause(){
     pauseGame = true;
 }
 
-void Game::resume(){
+inline void Game::resume(){
     pauseGame = false;
 }
 
-void Game::end(){
+inline void Game::end(){
     endGame = true;
 }
 
-void Game::start(){
+inline void Game::newGame(){
     endGame = false;
 }
 
-bool Game::isActive(){
+inline bool Game::isActive(){
     return playGame;
 }
 
-void Game::exit(){
+inline void Game::exit(){
     playGame = false;
 }
 
-bool Game::isPaused(){
+inline bool Game::isPaused(){
     return pauseGame;
 }
 
-bool Game::hasEnded(){
+inline bool Game::hasEnded(){
     return endGame;
 }
     

@@ -6,75 +6,51 @@
 //
 
 class Menu{
-    WINDOW *menu_win;
-    WINDOW *error_win;
     
-    
-    int numberOfMenuItems;
-    std::string menuMessage;
-    int currentItem;
+    int numberOfMenuItems, currentItem;
+    std::string menuMessage, *itemName;
     
     void printInTheMiddle(WINDOW *local_win, int height, std::string text);
  
 public:
-    std::string *itemName;
     
-    Menu();
+    template <typename Arg, typename... Args>
     
-    /* Constructors that can be used to define any menu with a list of 2,3 or 4 menu items */
-    
-    Menu(std::string message, std::string item_0, std::string item_1);
-    
-    Menu(std::string message, std::string item_0, std::string item_1, std::string item_2);
-    
-    Menu(std::string message, std::string item_0, std::string item_1, std::string item_2, std::string item_3);
-    
-    
+    Menu(std::string menuMessage, Arg item1, Args... item2); //Constructor defining a menu object with any number of menu list items
+   
     int getSelectedItem(){ return currentItem; }
     
     void show();
     
-    void showError(std::string errorMessage);
-    void showError(std::string errorMessage, std::string secondMessage);
+    template <typename T, typename... Ts>
+    void showError(T item1, Ts... item2);
+    //void showError(std::string errorMessage, std::string secondMessage);
     
-    std::string outcome(){
-        return itemName[currentItem];
-    }
+    std::string outcome();
 
 };
 
 
 
-Menu::Menu(std::string message, std::string item_0, std::string item_1){
-    numberOfMenuItems = 2;
-    itemName = new std::string[numberOfMenuItems];
-    menuMessage = message;
-    itemName[0] = item_0;
-    itemName[1] = item_1;
-}
-
-Menu::Menu(std::string message, std::string item_0, std::string item_1, std::string item_2){
-    numberOfMenuItems = 3;
-    itemName = new std::string[numberOfMenuItems];
-    menuMessage = message;
-    itemName[0] = item_0;
-    itemName[1] = item_1;
-    itemName[2] = item_2;
-}
-
-Menu::Menu(std::string message, std::string item_0, std::string item_1, std::string item_2, std::string item_3){
-    numberOfMenuItems = 4;
-    itemName = new std::string[numberOfMenuItems];
-    menuMessage = message;
-    itemName[0] = item_0;
-    itemName[1] = item_1;
-    itemName[2] = item_2;
-    itemName[3] = item_3;
+template <typename Arg, typename... Args>
+Menu::Menu(std::string menuMessage, Arg item1, Args... item2){
+    this-> menuMessage = menuMessage;
+    
+    std::string item[] = {item1, item2...};
+    
+    itemName = new std::string[sizeof(item)/sizeof(item[0])];
+    
+    numberOfMenuItems = sizeof(item) / sizeof(item[0]);
+    
+    for(int i = 0; i< numberOfMenuItems; i++){
+        itemName[i] = item[i];
+    }
 }
 
 void Menu::show(){
     bool menuActive = true;
     currentItem = 0;
+    WINDOW *menu_win;
     menu_win = newwin(20, 80, 5, 10);
     
     while(menuActive){
@@ -108,41 +84,34 @@ void Menu::show(){
     
 }
 
-void Menu::showError(std::string errorMessage){
+template <typename T, typename... Ts>
+void Menu::showError(T item1, Ts... item2){
     bool active = true;
-    error_win = newwin(10, 80, 5, 10);
+    std::string item[] = {item1, item2...};
+    
+    WINDOW *error_win;
+    error_win = newwin(sizeof(item)/sizeof(item[0]) + 6, 80, 5, 10);
     
     while(active){
         napms(1000 / 10);
         werase(error_win);
         clear();
-        box(error_win, 0, 0);
         int input = getch();
         if(input == 10) active = false;
         
-        printInTheMiddle(error_win, 3, errorMessage);
+        for(int i=0; i< sizeof(item)/sizeof(item[0]); i++){
+            printInTheMiddle(error_win, 3 + i, item[i]);
+            wprintw(error_win, "\n");
+        }
+        
+        box(error_win, 0, 0);
         
         wrefresh(error_win);
     }
 }
 
-void Menu::showError(std::string errorMessage, std::string secondMessage){
-    bool active = true;
-    error_win = newwin(10, 80, 5, 10);
-    
-    while(active){
-        napms(1000 / 10);
-        werase(error_win);
-        clear();
-        box(error_win, 0, 0);
-        int input = getch();
-        if(input == 10) active = false;
-        
-        printInTheMiddle(error_win, 3, errorMessage);
-        printInTheMiddle(error_win, 4, secondMessage);
-        
-        wrefresh(error_win);
-    }
+std::string Menu::outcome(){
+    return itemName[currentItem];
 }
 
 void Menu::printInTheMiddle(WINDOW *local_win, int height, std::string text){
