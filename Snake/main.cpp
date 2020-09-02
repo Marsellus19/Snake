@@ -27,6 +27,7 @@ int main(int argc, const char * argv[]) {
         
         if(snake.isDead()){
             progress.wipe();
+            
             deadMenu.show();
             
             if(deadMenu.outcome() == "Play Again"){
@@ -86,9 +87,13 @@ int main(int argc, const char * argv[]) {
                 }
             }
             else if(mainMenu.outcome() == "Load Game"){
-                game.resume();
-                game.start();
-                progress.load(game, snake, fruit);
+                if(progress.fileNotFound()) mainMenu.showError("No game progress saved", "Hit enter to go back");
+                else{
+                    progress.load(game, snake, fruit);
+                    game.resume();
+                    game.start();
+                }
+                
             }
             else if(mainMenu.outcome() == "Exit Game"){
                 game.exit();

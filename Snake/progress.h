@@ -16,6 +16,8 @@ public:
     void load(Game &game, Snake &snake, Fruit &fruit);
     
     void wipe();
+    
+    bool fileNotFound();
 
 }progress;
 
@@ -67,52 +69,63 @@ void Progress::load(Game &game, Snake &snake, Fruit &fruit){
     std::ifstream progressFile;
     progressFile.open(filePath);
     
-    /* Load snake body coordinates and set the direction */
-    std::list<int> body_y = *snake.getBodyPtr_y();
-    std::list<int> body_x = *snake.getBodyPtr_x();
-    body_y.clear();
-    body_x.clear();
-    
-    getline(progressFile, dataLine);
-    std::stringstream ss(dataLine);
-
-    while (ss >> singleNum){
-        body_y.push_back(std::stoi(singleNum));
+    if(progressFile.is_open()){
+        
+        /* Load snake body coordinates and set the direction */
+        std::list<int> body_y = *snake.getBodyPtr_y();
+        std::list<int> body_x = *snake.getBodyPtr_x();
+        body_y.clear();
+        body_x.clear();
+        
+        getline(progressFile, dataLine);
+        std::stringstream ss(dataLine);
+        
+        while (ss >> singleNum){
+            body_y.push_back(std::stoi(singleNum));
+        }
+        
+        snake.setBody_y(body_y);
+        
+        getline(progressFile, dataLine);
+        std::stringstream pp(dataLine);
+        
+        while (pp >> singleNum){
+            body_x.push_back(std::stoi(singleNum));
+        }
+        
+        snake.setBody_x(body_x);
+        
+        snake.setHead_y(body_y.front());
+        snake.setHead_x(body_x.front());
+        
+        getline(progressFile, dataLine);
+        game.setDirection(Game::directions(std::stoi(dataLine)));
+        
+        
+        /* Load fruit coordinates */
+        getline(progressFile, dataLine);
+        fruit.set_y(std::stoi(dataLine));
+        getline(progressFile, dataLine);
+        fruit.set_x(std::stoi(dataLine));
+        
+        
+        /* Load game difficulty */
+        getline(progressFile, dataLine);
+        game.setFps(std::stoi(dataLine));
+        
+        progressFile.close();
     }
-    
-    snake.setBody_y(body_y);
-    
-    getline(progressFile, dataLine);
-    std::stringstream pp(dataLine);
-
-    while (pp >> singleNum){
-        body_x.push_back(std::stoi(singleNum));
-    }
-    
-    snake.setBody_x(body_x);
-    
-    snake.setHead_y(body_y.front());
-    snake.setHead_x(body_x.front());
-    
-    getline(progressFile, dataLine);
-    game.setDirection(Game::directions(std::stoi(dataLine)));
-    
-    
-    /* Load fruit coordinates */
-    getline(progressFile, dataLine);
-    fruit.set_y(std::stoi(dataLine));
-    getline(progressFile, dataLine);
-    fruit.set_x(std::stoi(dataLine));
-    
-    
-    /* Load game difficulty */
-    getline(progressFile, dataLine);
-    game.setFps(std::stoi(dataLine));
-    
-    progressFile.close();
-    
 }
 
 void Progress::wipe(){
     remove(filePath.c_str());
+}
+
+bool Progress::fileNotFound(){
+    
+    std::ifstream progressFile;
+    progressFile.open(filePath);
+    if(progressFile.is_open()) progressFile.close();
+    
+    return progressFile.fail();
 }

@@ -6,8 +6,9 @@
 //
 
 class Menu{
-protected:
     WINDOW *menu_win;
+    WINDOW *error_win;
+    
     
     int numberOfMenuItems;
     std::string menuMessage;
@@ -31,7 +32,10 @@ public:
     
     int getSelectedItem(){ return currentItem; }
     
-    int show();
+    void show();
+    
+    void showError(std::string errorMessage);
+    void showError(std::string errorMessage, std::string secondMessage);
     
     std::string outcome(){
         return itemName[currentItem];
@@ -68,12 +72,12 @@ Menu::Menu(std::string message, std::string item_0, std::string item_1, std::str
     itemName[3] = item_3;
 }
 
-int Menu::show(){
-    bool menuActiv = true;
+void Menu::show(){
+    bool menuActive = true;
     currentItem = 0;
     menu_win = newwin(20, 80, 5, 10);
     
-    while(menuActiv){
+    while(menuActive){
         napms(1000 / 10);
         werase(menu_win);
         clear();
@@ -84,7 +88,7 @@ int Menu::show(){
         
         if(input == KEY_UP || input == KEY_LEFT) currentItem--;
         else if(input == KEY_DOWN || input == KEY_RIGHT) currentItem++;
-        else if(input == 10) menuActiv = false; //Enter key
+        else if(input == 10) menuActive = false; //Enter key
         
         if(currentItem == -1) currentItem = numberOfMenuItems - 1;
         else if(currentItem == numberOfMenuItems) currentItem = 0;
@@ -102,7 +106,43 @@ int Menu::show(){
         wrefresh(menu_win);
     }
     
-    return currentItem;
+}
+
+void Menu::showError(std::string errorMessage){
+    bool active = true;
+    error_win = newwin(10, 80, 5, 10);
+    
+    while(active){
+        napms(1000 / 10);
+        werase(error_win);
+        clear();
+        box(error_win, 0, 0);
+        int input = getch();
+        if(input == 10) active = false;
+        
+        printInTheMiddle(error_win, 3, errorMessage);
+        
+        wrefresh(error_win);
+    }
+}
+
+void Menu::showError(std::string errorMessage, std::string secondMessage){
+    bool active = true;
+    error_win = newwin(10, 80, 5, 10);
+    
+    while(active){
+        napms(1000 / 10);
+        werase(error_win);
+        clear();
+        box(error_win, 0, 0);
+        int input = getch();
+        if(input == 10) active = false;
+        
+        printInTheMiddle(error_win, 3, errorMessage);
+        printInTheMiddle(error_win, 4, secondMessage);
+        
+        wrefresh(error_win);
+    }
 }
 
 void Menu::printInTheMiddle(WINDOW *local_win, int height, std::string text){
