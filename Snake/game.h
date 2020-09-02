@@ -7,13 +7,12 @@
 
 class Game {
     const static int height = 50, width = 100;
-    const static int easy = 5, normal = 10, extreme = 20; //fps for each difficulty
-    int fps = normal; //default fps for when the game starts up for the first time
+    int fps;
     
     bool playGame, pauseGame, endGame;
     
 public:
-    enum difficulty {EASY = 0, NORMAL, EXTREME};
+    enum difficulty {EASY = 5, NORMAL = 10, EXTREME = 20, RIDICULOUS = 50};
     enum directions {UP = 1, RIGHT, DOWN, LEFT};
     WINDOW *gameArea;
     
@@ -38,7 +37,7 @@ public:
     
     void setDirection(directions dir);
     
-    void setDifficulty(difficulty diff);
+    void setDifficulty(int difficulty);
     
     int getFps();
     
@@ -53,6 +52,7 @@ public:
     void defColors();
     
 }game;
+
 
 
 
@@ -82,6 +82,7 @@ inline void Game::end(){
 
 inline void Game::newGame(){
     endGame = false;
+    setDirection(RIGHT);
 }
 
 inline bool Game::isActive(){
@@ -100,10 +101,8 @@ inline bool Game::hasEnded(){
     return endGame;
 }
     
-void Game::setDifficulty(difficulty diff){
-    if(diff == EASY) fps = easy;
-    else if(diff == NORMAL) fps = normal;
-    else if(diff == EXTREME) fps = extreme;
+void Game::setDifficulty(int difficulty){
+    fps = difficulty;
 }
 
 void Game::setDirection(directions dir){
@@ -152,6 +151,7 @@ Game::Game(){
     pauseGame = true;
     endGame = true;
     dir = RIGHT;
+    fps = NORMAL; //default fps for when the game starts up for the first time
 }
 
 void Game::defColors(){

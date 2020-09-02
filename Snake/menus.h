@@ -14,17 +14,14 @@ class Menu{
  
 public:
     
-    template <typename Arg, typename... Args>
+    template <typename T, typename... Ts>
     
-    Menu(std::string menuMessage, Arg item1, Args... item2); //Constructor defining a menu object with any number of menu list items
-   
-    int getSelectedItem(){ return currentItem; }
+    Menu(std::string menuMessage, T item1, Ts... item2); //Constructor defining a menu object with any number of menu list items
     
     void show();
     
-    template <typename T, typename... Ts>
-    void showError(T item1, Ts... item2);
-    //void showError(std::string errorMessage, std::string secondMessage);
+    template <typename N, typename... Ns>
+    void showError(N item1, Ns... item2);
     
     std::string outcome();
 
@@ -32,8 +29,20 @@ public:
 
 
 
-template <typename Arg, typename... Args>
-Menu::Menu(std::string menuMessage, Arg item1, Args... item2){
+
+Menu mainMenu("Welcome to the game of snake!", "New Game", "Load Game", "Exit Game");
+
+Menu difficultyMenu("Choose difficulty", "Easy", "Normal", "Extreme", "Ridiculous!");
+
+Menu pauseMenu("Paused!", "Go Back", "Main Menu");
+
+Menu deadMenu("Game Over!!!", "Play Again", "Main Menu");
+
+
+
+
+template <typename T, typename... Ts>
+Menu::Menu(std::string menuMessage, T item1, Ts... item2){
     this-> menuMessage = menuMessage;
     
     std::string item[] = {item1, item2...};
@@ -51,7 +60,7 @@ void Menu::show(){
     bool menuActive = true;
     currentItem = 0;
     WINDOW *menu_win;
-    menu_win = newwin(20, 80, 5, 10);
+    menu_win = newwin(numberOfMenuItems + 15, 80, 5, 10);
     
     while(menuActive){
         napms(1000 / 10);
@@ -84,8 +93,8 @@ void Menu::show(){
     
 }
 
-template <typename T, typename... Ts>
-void Menu::showError(T item1, Ts... item2){
+template <typename N, typename... Ns>
+void Menu::showError(N item1, Ns... item2){
     bool active = true;
     std::string item[] = {item1, item2...};
     
@@ -118,12 +127,3 @@ void Menu::printInTheMiddle(WINDOW *local_win, int height, std::string text){
     unsigned long stringLength = text.size();
     mvwprintw(local_win, height, (40-((int)stringLength/2)), "%s", text.c_str());
 }
-
-
-Menu mainMenu("Welcome to the game of snake!", "New Game", "Load Game", "Exit Game");
-
-Menu difficultyMenu("Choose difficulty", "Easy", "Normal", "Extreme");
-
-Menu pauseMenu("Paused!", "Go Back", "Main Menu", "Exit Game");
-
-Menu deadMenu("Game Over!!!", "Play Again", "Main Menu", "Exit Game");

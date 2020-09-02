@@ -33,18 +33,16 @@ public:
     int getLength();
     
     std::list<int> *getBodyPtr_y();
-    
     std::list<int> *getBodyPtr_x();
     
     void setBody_y(std::list<int> body_y);
-    
     void setBody_x(std::list<int> body_x);
     
     void setHead_y(int head_y);
-    
     void setHead_x(int head_x);
     
 }snake(game.gameArea);
+
 
 
 
@@ -77,7 +75,6 @@ void Snake::show(){
         mvwprintw(local_win, *y_it, *x_it, "#");
         wattroff(local_win, COLOR_PAIR(CYAN));
     }
-    //wrefresh(local_win);
 }
 
 inline bool Snake::hasEaten(Fruit fruit){

@@ -34,20 +34,17 @@ int main(int argc, const char * argv[]) {
                 game.resume();
                 game.newGame();
                 snake.newSnake();
-                fruit.newPos();
+                fruit.newFruit();
             }
             else if(deadMenu.outcome() == "Main Menu"){
                 game.pause();
                 game.end();
             }
-            else if(deadMenu.outcome() == "Exit Game"){
-                game.exit();
-            }
         }
         
         if(snake.hasEaten(fruit)){
             snake.grow();
-            fruit.newPos();
+            fruit.newFruit();
         }
         
         if(game.isPaused() && !game.hasEnded()){
@@ -61,9 +58,6 @@ int main(int argc, const char * argv[]) {
             else if(pauseMenu.outcome() == "Main Menu"){
                 game.end();
             }
-            else if(pauseMenu.outcome() == "Exit Game"){
-                game.exit();
-            }
         }
         
         mainMenu:
@@ -74,7 +68,8 @@ int main(int argc, const char * argv[]) {
                 game.resume();
                 game.newGame();
                 snake.newSnake();
-                fruit.newPos();
+                fruit.newFruit();
+                
                 difficultyMenu.show();
                 
                 if(difficultyMenu.outcome() == "Easy"){
@@ -85,6 +80,9 @@ int main(int argc, const char * argv[]) {
                 }
                 else if(difficultyMenu.outcome() == "Extreme"){
                     game.setDifficulty(Game::EXTREME);
+                }
+                else if(difficultyMenu.outcome() == "Ridiculous!"){
+                    game.setDifficulty(Game::RIDICULOUS);
                 }
             }
             else if(mainMenu.outcome() == "Load Game"){

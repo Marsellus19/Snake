@@ -23,6 +23,7 @@ public:
 
 
 
+
 void Progress::save(Game game, Snake snake, Fruit fruit){
     std::ofstream progressFile;
     progressFile.open(filePath);
