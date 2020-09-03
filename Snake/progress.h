@@ -6,6 +6,9 @@
 //  Copyright © 2020 Marcel. All rights reserved.
 //
 
+#ifndef Progress_h
+#define Progress_h
+
 class Progress{
     std::string filePath= "/Users/marcel/Documents/XCode/Snake/game_progress.txt";
     
@@ -130,3 +133,5 @@ bool Progress::fileNotFound(){
     
     return progressFile.fail();
 }
+
+#endif

@@ -5,6 +5,9 @@
 //  Copyright © 2020 Marcel. All rights reserved.
 //
 
+#ifndef Menu_h
+#define Menu_h
+
 class Menu{
     
     int numberOfMenuItems, currentItem;
@@ -84,9 +87,9 @@ void Menu::show(){
             if(currentItem != i)printInTheMiddle(menu_win, 10 + i, itemName[i]);
         }
         
-        wattron(menu_win, COLOR_PAIR(CYAN));
+        wattron(menu_win, COLOR_PAIR(2));
         printInTheMiddle(menu_win, 10+currentItem, itemName[currentItem]);
-        wattroff(menu_win, COLOR_PAIR(CYAN));
+        wattroff(menu_win, COLOR_PAIR(2));
         
         wrefresh(menu_win);
     }
@@ -127,3 +130,5 @@ void Menu::printInTheMiddle(WINDOW *local_win, int height, std::string text){
     unsigned long stringLength = text.size();
     mvwprintw(local_win, height, (40-((int)stringLength/2)), "%s", text.c_str());
 }
+
+#endif

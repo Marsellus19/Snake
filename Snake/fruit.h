@@ -5,6 +5,9 @@
 //  Copyright © 2020 Marcel. All rights reserved.
 //
 
+#ifndef Fruit_h
+#define Fruit_h
+
 class Fruit{
     
     int fruit_x, fruit_y;
@@ -25,7 +28,7 @@ public:
     
     void show();
     
-} fruit(game.gameArea);
+};
 
 
 
@@ -61,7 +64,9 @@ void Fruit::set_x(int fruit_x){
 }
 
 void Fruit::show(){
-    wattron(local_win, COLOR_PAIR(YELLOW));
+    wattron(local_win, COLOR_PAIR(1));
     mvwprintw(local_win, fruit_y, fruit_x, "*");
-    wattroff(local_win, COLOR_PAIR(YELLOW));
+    wattroff(local_win, COLOR_PAIR(1));
 }
+
+#endif

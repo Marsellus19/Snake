@@ -11,11 +11,15 @@
 #include <ncurses.h>
 #include <list>
 #include <string>
-#include "game.h"
+#include "Game.h"
 #include "fruit.h"
 #include "snake.h"
-#include "menus.h"
+#include "menu.h"
 #include "progress.h"
+
+Game game;
+Fruit fruit(game.gameArea);
+Snake snake(game.gameArea);
 
 
 int main(int argc, const char * argv[]) {

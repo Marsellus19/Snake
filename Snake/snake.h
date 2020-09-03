@@ -4,6 +4,9 @@
 //  Created by Marcel on 05/05/2020.
 //  Copyright © 2020 Marcel. All rights reserved.
 
+#ifndef Snake_h
+#define Snake_h
+
 class Snake{
     
     std::list<int> body_y;
@@ -41,7 +44,7 @@ public:
     void setHead_y(int head_y);
     void setHead_x(int head_x);
     
-}snake(game.gameArea);
+};
 
 
 
@@ -71,9 +74,9 @@ void Snake::move(Game::directions dir){
 void Snake::show(){
     std::list<int>::iterator y_it, x_it;
     for(y_it=body_y.begin(), x_it=body_x.begin(); y_it!=body_y.end(); y_it++, x_it++){
-        wattron(local_win, COLOR_PAIR(CYAN));
+        wattron(local_win, COLOR_PAIR(2));
         mvwprintw(local_win, *y_it, *x_it, "#");
-        wattroff(local_win, COLOR_PAIR(CYAN));
+        wattroff(local_win, COLOR_PAIR(2));
     }
 }
 
@@ -152,3 +155,5 @@ void Snake::setHead_y(int head_y){
 void Snake::setHead_x(int head_x){
     this-> head_x = head_x;
 }
+
+#endif
