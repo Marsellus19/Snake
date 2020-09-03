@@ -1,4 +1,4 @@
-//  game.h
+//  Game.h
 //  Snake
 //
 //  Created by Marcel on 25/07/2020.
@@ -54,6 +54,6 @@ public:
     
     void defColors();
     
-};//game;
+};
 
-#endif
+#endif /* Game_h */

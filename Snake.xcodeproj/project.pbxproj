@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1F1EA93825017BC8004BA84F /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EA93725017BC8004BA84F /* Game.cpp */; };
+		1F1EA93A250187FB004BA84F /* Snake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EA939250187FB004BA84F /* Snake.cpp */; };
+		1F1EA93C250189FA004BA84F /* Fruit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EA93B250189FA004BA84F /* Fruit.cpp */; };
+		1F1EA93E25018A7B004BA84F /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EA93D25018A7B004BA84F /* Menu.cpp */; };
+		1F1EA940250190BD004BA84F /* Progress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F1EA93F250190BD004BA84F /* Progress.cpp */; };
 		1F3B641A24604616007EFBF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B641924604616007EFBF5 /* main.cpp */; };
 		1FDB735624618F29001FD332 /* libncurses.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDB735524618F1D001FD332 /* libncurses.tbd */; };
 /* End PBXBuildFile section */
@@ -25,15 +29,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1F052E6124FD55520096B6F5 /* progress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = progress.h; sourceTree = "<group>"; };
+		1F052E6124FD55520096B6F5 /* Progress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Progress.h; sourceTree = "<group>"; };
 		1F1EA93725017BC8004BA84F /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		1F1EA939250187FB004BA84F /* Snake.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Snake.cpp; sourceTree = "<group>"; };
+		1F1EA93B250189FA004BA84F /* Fruit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Fruit.cpp; sourceTree = "<group>"; };
+		1F1EA93D25018A7B004BA84F /* Menu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
+		1F1EA93F250190BD004BA84F /* Progress.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Progress.cpp; sourceTree = "<group>"; };
 		1F3B641624604616007EFBF5 /* Snake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Snake; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3B641924604616007EFBF5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1FDB735524618F1D001FD332 /* libncurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libncurses.tbd; path = usr/lib/libncurses.tbd; sourceTree = SDKROOT; };
-		1FDB735724618F54001FD332 /* snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = snake.h; sourceTree = "<group>"; };
-		1FE2EAC124CB29FC00D8527B /* menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menu.h; sourceTree = "<group>"; };
+		1FDB735724618F54001FD332 /* Snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Snake.h; sourceTree = "<group>"; };
+		1FE2EAC124CB29FC00D8527B /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		1FE2EAC324CC652200D8527B /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		1FE2EAC424CC68F500D8527B /* fruit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fruit.h; sourceTree = "<group>"; };
+		1FE2EAC424CC68F500D8527B /* Fruit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fruit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +79,14 @@
 				1F3B641924604616007EFBF5 /* main.cpp */,
 				1FE2EAC324CC652200D8527B /* Game.h */,
 				1F1EA93725017BC8004BA84F /* Game.cpp */,
-				1FE2EAC124CB29FC00D8527B /* menu.h */,
-				1FDB735724618F54001FD332 /* snake.h */,
-				1FE2EAC424CC68F500D8527B /* fruit.h */,
-				1F052E6124FD55520096B6F5 /* progress.h */,
+				1FDB735724618F54001FD332 /* Snake.h */,
+				1F1EA939250187FB004BA84F /* Snake.cpp */,
+				1FE2EAC424CC68F500D8527B /* Fruit.h */,
+				1F1EA93B250189FA004BA84F /* Fruit.cpp */,
+				1FE2EAC124CB29FC00D8527B /* Menu.h */,
+				1F1EA93D25018A7B004BA84F /* Menu.cpp */,
+				1F052E6124FD55520096B6F5 /* Progress.h */,
+				1F1EA93F250190BD004BA84F /* Progress.cpp */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -144,8 +156,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F1EA93C250189FA004BA84F /* Fruit.cpp in Sources */,
 				1F3B641A24604616007EFBF5 /* main.cpp in Sources */,
+				1F1EA940250190BD004BA84F /* Progress.cpp in Sources */,
 				1F1EA93825017BC8004BA84F /* Game.cpp in Sources */,
+				1F1EA93A250187FB004BA84F /* Snake.cpp in Sources */,
+				1F1EA93E25018A7B004BA84F /* Menu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

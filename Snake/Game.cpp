@@ -1,15 +1,13 @@
-//
 //  Game.cpp
 //  Snake
 //
-//  Created by Marcel on 03/09/2020.
+//  Created by Marcel on 25/07/2020.
 //  Copyright © 2020 Marcel. All rights reserved.
 //
 
 #include <iostream>
 #include <ncurses.h>
 #include "Game.h"
-
 
 Game::directions Game::getInput(){
     int input;

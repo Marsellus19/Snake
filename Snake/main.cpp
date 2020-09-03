@@ -12,14 +12,21 @@
 #include <list>
 #include <string>
 #include "Game.h"
-#include "fruit.h"
-#include "snake.h"
-#include "menu.h"
-#include "progress.h"
+#include "Fruit.h"
+#include "Snake.h"
+#include "Menu.h"
+#include "Progress.h"
 
 Game game;
 Fruit fruit(game.gameArea);
 Snake snake(game.gameArea);
+
+Progress progress;
+
+Menu mainMenu("Welcome to the game of snake!", "New Game", "Load Game", "Exit Game");
+Menu difficultyMenu("Choose difficulty", "Easy", "Normal", "Extreme", "Ridiculous!");
+Menu pauseMenu("Paused!", "Go Back", "Main Menu");
+Menu deadMenu("Game Over!!!", "Play Again", "Main Menu");
 
 
 int main(int argc, const char * argv[]) {
@@ -91,7 +98,7 @@ int main(int argc, const char * argv[]) {
             }
             else if(mainMenu.outcome() == "Load Game"){
                 if(progress.fileNotFound()){
-                    mainMenu.showError("No game progress saved", "Hit enter to go back");
+                    progress.showError();
                     goto mainMenu;
                 }
                 else{
