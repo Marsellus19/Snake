@@ -1,9 +1,19 @@
+//
+//        _______  __    _  _______  ___   _  _______      _______  _______  __   __  _______
+//       |       ||  |  | ||   _   ||   | | ||       |    |       ||   _   ||  |_|  ||       |
+//       |  _____||   |_| ||  |_|  ||   |_| ||    ___|    |    ___||  |_|  ||       ||    ___|
+//       | |_____ |       ||       ||      _||   |___     |   | __ |       ||       ||   |___
+//       |_____  ||  _    ||       ||     |_ |    ___|    |   ||  ||       ||       ||    ___|
+//        _____| || | |   ||   _   ||    _  ||   |___     |   |_| ||   _   || ||_|| ||   |___
+//       |_______||_|  |__||__| |__||___| |_||_______|    |_______||__| |__||_|   |_||_______|
+//
+//
 //  main.cpp
-//  Snake
 //
-//  Created by Marcel on 04/05/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 04/05/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
+
+//Disclaimer. This game was written for macOS. It hasn't been tested on Windows, althought it should work with very minor adjustments. I left comments next to macOS only commands
 
 #include <iostream>
 #include <fstream>
@@ -18,11 +28,13 @@
 #include "Progress.h"
 
 Game game;
-Fruit fruit(game.gameArea);
-Snake snake(game.gameArea);
+Fruit fruit(game.gameArea); //The gameArea is a window used by the ncurses library where the game happens
+Snake snake(game.gameArea); //Both fruit and snake objects need acces to it so that they appear on screen
 
 Progress progress;
 
+/* Each object derived fromm the Menu class is a separate menu. The first parameter is a menu message and the following
+   ones are individual menu list items. */
 Menu mainMenu("Welcome to the game of snake!", "New Game", "Load Game", "Exit Game");
 Menu difficultyMenu("Choose difficulty", "Easy", "Normal", "Extreme", "Ridiculous!");
 Menu pauseMenu("Paused!", "Go Back", "Main Menu");
@@ -30,25 +42,25 @@ Menu deadMenu("Game Over!!!", "Play Again", "Main Menu");
 
 
 int main(int argc, const char * argv[]) {
-    
+   
+    /* Main game loop */
     while(game.isActive()){
         game.refreshwin();
         
         snake.move(game.getInput());
         
+        /* Menu displayed after the snake runs into itself */
         if(snake.isDead()){
             progress.wipe();
             
             deadMenu.show();
             
             if(deadMenu.outcome() == "Play Again"){
-                game.resume();
                 game.newGame();
                 snake.newSnake();
                 fruit.newFruit();
             }
             else if(deadMenu.outcome() == "Main Menu"){
-                game.pause();
                 game.end();
             }
         }
@@ -58,7 +70,8 @@ int main(int argc, const char * argv[]) {
             fruit.newFruit();
         }
         
-        if(game.isPaused() && !game.hasEnded()){
+        /* Pause menu */
+        if(game.isPaused()){
             progress.save(game, snake, fruit);
             
             pauseMenu.show();
@@ -71,13 +84,14 @@ int main(int argc, const char * argv[]) {
             }
         }
         
+        /* Main menu */
         mainMenu:
-        if(game.isPaused() && game.hasEnded()){
+        if(game.hasEnded()){
             mainMenu.show();
             
             if(mainMenu.outcome() == "New Game"){
-                game.resume();
                 game.newGame();
+                game.resetDirection();
                 snake.newSnake();
                 fruit.newFruit();
                 
@@ -100,10 +114,12 @@ int main(int argc, const char * argv[]) {
                 if(progress.fileNotFound()){
                     progress.showError();
                     goto mainMenu;
+                    // I know that some people find the use of goto inappropriate, however I think I can be helpful and there's nothing wrong with it when used correctly.
+                    // In this instance it prevents the main loop from refreshing and therefore showing the game Area with snake for a split second
+                    // It could be achieved differently however the effort is not worth it in my opinion.
                 }
                 else{
                     progress.load(game, snake, fruit);
-                    game.resume();
                     game.newGame();
                 }
                 

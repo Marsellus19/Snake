@@ -1,9 +1,8 @@
 //  Progress.cpp
 //  Snake
 //
-//  Created by Marcel on 15/08/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 15/08/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #include <iostream>
 #include <fstream>
@@ -151,5 +150,3 @@ void Progress::showError(){
         wrefresh(error_win);
     }
 }
-
-

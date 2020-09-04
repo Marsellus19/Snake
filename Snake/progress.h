@@ -1,15 +1,14 @@
 //  Progress.h
 //  Snake
 //
-//  Created by Marcel on 15/08/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 15/08/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #ifndef Progress_h
 #define Progress_h
 
 class Progress{
-    std::string filePath= "/Users/marcel/Documents/XCode/Snake/game_progress.txt";
+    std::string filePath= "/Documents/game_progress.txt";
     
 public:
     

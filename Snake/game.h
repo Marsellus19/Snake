@@ -1,9 +1,8 @@
 //  Game.h
 //  Snake
 //
-//  Created by Marcel on 25/07/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 25/07/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #ifndef Game_h
 #define Game_h
@@ -39,6 +38,8 @@ public:
     void exit();
     
     void setDirection(directions dir);
+    
+    void resetDirection();
     
     void setDifficulty(int difficulty);
     

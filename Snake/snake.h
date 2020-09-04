@@ -1,8 +1,8 @@
 //  Snake.h
 //  Snake
 //
-//  Created by Marcel on 05/05/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
+//  Created by Marcel Krol on 05/05/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #ifndef Snake_h
 #define Snake_h

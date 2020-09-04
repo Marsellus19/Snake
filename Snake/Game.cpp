@@ -1,9 +1,8 @@
 //  Game.cpp
 //  Snake
 //
-//  Created by Marcel on 25/07/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 25/07/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #include <iostream>
 #include <ncurses.h>
@@ -30,11 +29,16 @@ void Game::resume(){
 }
 
 void Game::end(){
+    pauseGame = true;
     endGame = true;
 }
 
 void Game::newGame(){
+    pauseGame = false;
     endGame = false;
+}
+
+void Game::resetDirection(){
     setDirection(RIGHT);
 }
 
@@ -47,11 +51,13 @@ void Game::exit(){
 }
 
 bool Game::isPaused(){
-    return pauseGame;
+    if(!endGame && pauseGame) return true;
+    else return false;
 }
 
 bool Game::hasEnded(){
-    return endGame;
+    if(endGame && pauseGame) return true;
+    else return false;
 }
     
 void Game::setDifficulty(int difficulty){
@@ -91,7 +97,7 @@ void Game::drawBox(){
 }
 
 Game::Game(){
-    system("printf '\e[8;50;100t'"); //resize the teminal window to 100x50
+    system("printf '\e[8;50;100t'"); //resize the teminal window to 100x50 //I belive this a macOs only command
     initscr(); //initialize ncurses library
     resizeterm(height, width);
     refresh();

@@ -1,9 +1,8 @@
-//  Fruit.cpp
+//Fruit.cpp
 //  Snake
 //
-//  Created by Marcel on 25/07/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 25/07/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #include <iostream>
 #include <ncurses.h>

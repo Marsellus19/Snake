@@ -1,9 +1,8 @@
 //  Menu.h
 //  Snake
 //
-//  Created by Marcel on 24/07/2020.
-//  Copyright © 2020 Marcel. All rights reserved.
-//
+//  Created by Marcel Krol on 25/07/2020.
+//  Copyright © 2020 marcelkrol99@gmail.com
 
 #ifndef Menu_h
 #define Menu_h
@@ -47,4 +46,3 @@ Menu::Menu(std::string menuMessage, T item1, Ts... item2){
 }
 
 #endif /* Menu_h */
-
