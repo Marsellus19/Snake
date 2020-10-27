@@ -1,6 +1,8 @@
 # Snake
 This is an interpretation of the infamous snake game made for Computer Programming classes (CP2) at the Silesian University of Technology.
 
+The executable is under the releases tab.
+
 The game is rather straight forward and intuitive. Use arrow keys and the return key to navigate menus and play the game. There's no goal to reach. Just play until you die.
 
 You can choose between 4 difficulty levels: Easy, Normal, Extreme and Ridiculous.
